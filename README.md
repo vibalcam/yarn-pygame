@@ -1,6 +1,13 @@
 yarn.py, a Python runtime for Yarn dialogue
 ===========================================
 
+Modifications
+---------------
+
+Forked from https://github.com/robertpfeiffer/yarn-pygame
+
+Modified src/yarn/controller.py
+
 Getting Started 
 ---------------
 

@@ -1,6 +1,6 @@
 # part of yarn.py, copyright © 2019 Robert Pfeiffer
 """
-modified by vibalcam:
+modified by vibalcam, copyright © 2022:
 -	Added game local variables
 -   Added variable to follow the choices taken
 -	Added jumps
