@@ -9,6 +9,7 @@ modified by vibalcam, copyright © 2022:
 -	Fixed if statements with Boolean values
 -	Changes to ignore macros inside a jump (for example [[Hey <<if…>>]])
 -	Added inline if statements in options
+-   YarnStates can have attributes (for example to set rewards)
 -	Minor changes
 """
 
@@ -47,9 +48,10 @@ class YarnController(object):
             parsed = json.loads(open(path).read())
 
         for state in parsed:
-            body = state["body"]
-            title = state["title"]
-            new_state = YarnState(title, body, self)
+            state = state.copy()
+            body = state.pop("body")
+            title = state.pop("title")
+            new_state = YarnState(title, body, self, attr=state)
             self.states[title] = new_state
             new_state.pre_compile()
             for sub_state in new_state.sub_states:
@@ -277,7 +279,7 @@ def get_indented_block(lines, head):
 
 
 class YarnState(object):
-    def __init__(self, title, body, parent):
+    def __init__(self, title, body, parent, attr:Dict={}):
         self.title = title
         self.body = body
         self.src = body
@@ -285,6 +287,7 @@ class YarnState(object):
         self.message = ""
         self.choices = []
         self.controller = parent
+        self.attr = attr
 
     def pre_compile(self):
         self.sub_states = []
